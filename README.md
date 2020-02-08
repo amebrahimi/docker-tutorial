@@ -60,6 +60,18 @@ Pull nginx image from docker:
 
 `docker pull nginx`
 
+build an image from docker file:
+
+`docker image build -t prince537/nginx-website .`
+
+push an image to dockerhub:
+
+`docker push prince537/nginx-website`
+
+login to dockerhub:
+
+`docker login`
+
 ### docker run options
 
 interactive mode:
