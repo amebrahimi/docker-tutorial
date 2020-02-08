@@ -104,4 +104,30 @@ current directory we are in:
 
 ## Docker-File
 
-`FROM` in docker file is just a way of extending another image.
+in docker file is just a way of extending another image:
+
+`FROM`
+
+set the working directory in the container:
+
+`WORKDIR /src/to/file`
+
+copy from current machine to docker container:
+
+`COPY ./from ./to`
+
+run a command in the container:
+
+`RUN command (npm install)`
+
+expose a port from within the container:
+
+`EXPOSE PORTNUMBER (3000)`
+
+send a custom command to the container:
+
+`CMD ["npm", "start"]`
+
+build and run a composed docker file:
+
+`docker-compose up`
