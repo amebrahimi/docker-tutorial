@@ -64,13 +64,78 @@ register_activation_hook(__FILE__, array($princeBestPlugin, 'activate')); // Whe
 
 // deactivation
 register_deactivation_hook($file, $function);// The best practice here is to flush the rewrite rules
+```
 
+- Uninstall methods:
+
+```
 // uninstall
 register_uninstall_hook($file, $callback); // delete CPT, delete all the plugin data from the DB.
+
+```
+
+- Instead you can create a file named uninstall.php. The purpose of creating uninstall is to clear the dta stored for the plugin in database.
+
+```
+//the first line should be:
+
+if (!defined('WP_UNINSTALL_PLUGIN')) {
+    die;
+}
+
+```
+
+- Deleting data from the database:
+
+```
+//get all the posts from database
+$books = get_posts(array('post_type' => 'book', 'numberposts' => -1));
+//                        the unique slug ^ ,  get all the posts  ^
+
+foreach ($books as $book) {
+    wp_delete_post( $book->ID, true);
+    // Just delete it           ^
+}
+```
+
+- Another way for deleting all the posts using directly the database commands:
+
+```
+global $wpdb;
+$wpdb->query( "DELETE FROM wp_posts WHERE post_type = 'book' " );
+
+// delete all the wp_postmeta that don't match this id
+$wpdb->query("DELETE FROM wp_postmeta WHERE post_id NOT IN (SELECT id FROM wp_posts)");
+
+$wpdb->query("DELETE FROM wp_term_relationships WHERE post_id NOT IN (SELECT id FROM wp_posts)");
 ```
 
 - echo a function after the header was set in wordpress will trigger an error.
 
 - The procedural way to do something on `init`:
 
-` add_action('init', 'the_function_name'); `
+`add_action('init', 'the_function_name');`
+
+- refresh all the wordpress stuff and tell we created something new:
+
+`flush_rewrite_rules()`
+
+- to register a new post type:
+
+`register_post_type('book', ['public' => true, 'label' => 'Books']);`
+
+- Enqueue the css files for loading:
+
+`wp_enqueue_style('myplyginstyle', plugins_url('/assets/mystyle.css', __FILE__));`
+
+- Enqueue javascript files for loading:
+
+`wp_enqueue_script('myplyginscript', plugins_url('/assets/myscript.js', __FILE__));`
+
+- Add scripts to admin area:
+
+`add_action('admin_enqueue_scripts', array($this, 'enqueue'));`
+
+- To add scripts in the actual page:
+
+`add_action('wp_enqueue_scripts', array($this, 'enqueue'));`
