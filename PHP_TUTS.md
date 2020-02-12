@@ -70,3 +70,7 @@ register_uninstall_hook($file, $callback); // delete CPT, delete all the plugin 
 ```
 
 - echo a function after the header was set in wordpress will trigger an error.
+
+- The procedural way to do something on `init`:
+
+` add_action('init', 'the_function_name'); `
