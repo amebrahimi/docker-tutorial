@@ -45,7 +45,7 @@
 if (!defined('ABSPATH')) {
     die;
 }
-register_activation_hook(__FILE__, array($princeBestPlugin, 'activate'));
+defined('ABSPATH') or die('Hey, you can\'t access this file, you silly human');
 if (!function_exists('add_action')) {
     echo 'Hey, you can\'t access this file, you silly human';
     exit;
