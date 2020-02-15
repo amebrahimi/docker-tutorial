@@ -72,6 +72,26 @@ login to dockerhub:
 
 `docker login`
 
+see an image history:
+
+`docker image history $imageName`
+
+inspect an image metadata:
+
+`docker image inspect $imageName`
+
+change tag:
+
+`docker image tag $SOURCE_IMAGE[:TAG] $TARGET_IMAGE[:TAG]`
+
+push owned images to docker hub:
+
+`docker image push $TARGET_IMAGE[:TAG]`
+
+see container logs:
+
+`docker container logs -f $CONTAINER_NAME`
+
 ### docker run options
 
 interactive mode:
@@ -98,15 +118,27 @@ bind local storage:
 
 `-v`
 
+deletes container after the work is done:
+
+`--rm`
+
 current directory we are in:
 
 `$(pwd)`
 
+keep watching the logs:
+
+`-f`
+
 ## Docker-File
 
-in docker file is just a way of extending another image:
+in docker file is just a way of extending another image ("Required"):
 
 `FROM`
+
+create environment variables:
+
+`ENV ENV_NAME`
 
 set the working directory in the container:
 
@@ -124,7 +156,7 @@ expose a port from within the container:
 
 `EXPOSE PORTNUMBER (3000)`
 
-send a custom command to the container:
+send a custom command to the container ("Required"):
 
 `CMD ["npm", "start"]`
 
