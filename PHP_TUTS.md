@@ -139,3 +139,42 @@ $wpdb->query("DELETE FROM wp_term_relationships WHERE post_id NOT IN (SELECT id 
 - To add scripts in the actual page:
 
 `add_action('wp_enqueue_scripts', array($this, 'enqueue'));`
+
+- To add a dependency:
+
+`require_once plugin-dir`
+
+- The hook to add a menu page to the menu list:
+
+`add_action('admin_menu', array())`
+
+- To add a menu page in the menu list:
+
+`add_menu_page($page_title, $menu_title, $capability, $menu_slug, $function, $icon_ur, $position)`
+
+## Composer
+
+- define composer project
+
+`composer init`
+
+- Specify autoload option in composer.json
+
+```{
+    "name": "amir-mahmoud/prince-best-plugin",
+    "description": "This the awsome plugin I'm creating",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Amir-Mahmoud",
+            "email": "amirebrahimi5@live.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {"INC\\":"./inc"},
+    }
+}
+```
